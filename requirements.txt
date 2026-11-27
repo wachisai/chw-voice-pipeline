@@ -1,0 +1,10 @@
+pydantic>=2.7
+python-dotenv>=1.0
+
+# Needed only for live runs against the APIs. The offline path and the full
+# test suite run without them.
+openai>=1.51
+python-telegram-bot>=21.0
+
+# Development
+pytest>=8.0

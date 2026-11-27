@@ -1,0 +1,44 @@
+{
+  "referral": {
+    "patient": {
+      "referral_date": null,
+      "referral_time": null,
+      "patient_name": null,
+      "sex": "unknown",
+      "age_years": null,
+      "village": null
+    },
+    "referral": {
+      "reasons": "Long-standing cough of about two months with weight loss",
+      "main_problems": "Cough about two months, weight loss",
+      "treatment_given": null,
+      "comments": "CHV does not know the client's name or contact number"
+    },
+    "chv": {
+      "chv_name": "Ali",
+      "chv_mobile": null,
+      "chv_village": null,
+      "sub_location": null,
+      "location": null,
+      "ward": null,
+      "community_unit": null,
+      "link_health_facility": "Dispensary, not named"
+    },
+    "receiving": {
+      "officer_name": null,
+      "received_date": null,
+      "received_time": null,
+      "profession": null,
+      "receiving_facility": null
+    }
+  },
+  "confidence": 0.34,
+  "unclear_fields": [
+    "patient.patient_name",
+    "patient.sex",
+    "patient.age_years",
+    "patient.village",
+    "chv.link_health_facility"
+  ],
+  "detected_language": "sw"
+}

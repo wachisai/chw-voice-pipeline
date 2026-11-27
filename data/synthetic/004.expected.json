@@ -1,0 +1,38 @@
+{
+  "referral": {
+    "patient": {
+      "referral_date": null,
+      "referral_time": "14:30",
+      "patient_name": "Sarah Adhiambo",
+      "sex": "F",
+      "age_years": 45,
+      "village": "Nyalenda B"
+    },
+    "referral": {
+      "reasons": "Dizziness with a raised blood pressure reading of 160/100 taken at a chemist",
+      "main_problems": "Dizziness, raised blood pressure",
+      "treatment_given": "None",
+      "comments": "Stopped hypertension medication three months ago on cost grounds; currently on no medication"
+    },
+    "chv": {
+      "chv_name": "Mary Achieng",
+      "chv_mobile": "0733112334",
+      "chv_village": "Nyalenda B",
+      "sub_location": "Nyalenda",
+      "location": "Kisumu Central",
+      "ward": "Nyalenda B",
+      "community_unit": "Nyalenda B",
+      "link_health_facility": "Nyalenda Dispensary"
+    },
+    "receiving": {
+      "officer_name": null,
+      "received_date": null,
+      "received_time": null,
+      "profession": null,
+      "receiving_facility": null
+    }
+  },
+  "confidence": 0.91,
+  "unclear_fields": ["patient.referral_date"],
+  "detected_language": "en"
+}

@@ -1,0 +1,38 @@
+{
+  "referral": {
+    "patient": {
+      "referral_date": null,
+      "referral_time": null,
+      "patient_name": "Faith Mwende",
+      "sex": "F",
+      "age_years": 4,
+      "village": "Kyuso"
+    },
+    "referral": {
+      "reasons": "Immunization catch-up: measles vaccine not received and the last two doses of other vaccines missed",
+      "main_problems": "Defaulted immunization schedule; child otherwise well, no fever, no cough",
+      "treatment_given": "None",
+      "comments": null
+    },
+    "chv": {
+      "chv_name": "Joseph Mutua",
+      "chv_mobile": "0700123456",
+      "chv_village": null,
+      "sub_location": "Kyuso",
+      "location": "Mwingi",
+      "ward": "Kyuso",
+      "community_unit": "Kyuso",
+      "link_health_facility": "Kyuso Sub County Hospital"
+    },
+    "receiving": {
+      "officer_name": null,
+      "received_date": null,
+      "received_time": null,
+      "profession": null,
+      "receiving_facility": null
+    }
+  },
+  "confidence": 0.89,
+  "unclear_fields": ["patient.referral_date", "patient.referral_time", "chv.chv_village"],
+  "detected_language": "en"
+}

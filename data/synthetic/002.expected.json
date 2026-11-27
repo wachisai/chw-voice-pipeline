@@ -1,0 +1,38 @@
+{
+  "referral": {
+    "patient": {
+      "referral_date": null,
+      "referral_time": null,
+      "patient_name": "Esther Njeri",
+      "sex": "F",
+      "age_years": 32,
+      "village": "Kamwangi"
+    },
+    "referral": {
+      "reasons": "Pregnant with swelling of the legs and a persistent headache; has not attended ANC since the first visit",
+      "main_problems": "Leg swelling, persistent headache in pregnancy of about seven months",
+      "treatment_given": "None",
+      "comments": "CHV requests she be seen the same day"
+    },
+    "chv": {
+      "chv_name": "Peter Kimani",
+      "chv_mobile": "0711234567",
+      "chv_village": null,
+      "sub_location": null,
+      "location": "Gatundu North",
+      "ward": "Gituamba",
+      "community_unit": "Kamwangi",
+      "link_health_facility": "Gatundu Level Four"
+    },
+    "receiving": {
+      "officer_name": null,
+      "received_date": null,
+      "received_time": null,
+      "profession": null,
+      "receiving_facility": null
+    }
+  },
+  "confidence": 0.85,
+  "unclear_fields": ["patient.referral_date", "patient.referral_time", "chv.chv_village", "chv.sub_location"],
+  "detected_language": "en"
+}

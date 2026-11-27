@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>MOH-100 referral form: the control condition</title>
+<style>
+  :root {
+    --bg:#FBFAF7; --card:#fff; --ink:#14171A; --muted:#5B6169; --faint:#8A9099;
+    --rule:#E3DFD6; --accent:#8C3A24; --ok:#2F6B4F;
+    --sans:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Helvetica,Arial,sans-serif;
+    --mono:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#131519;--card:#1B1E23;--ink:#ECE8E1;--muted:#A0A6AE;--faint:#757C85;
+          --rule:#2A2E35;--accent:#E0906E;--ok:#7FB79A;}
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);
+       font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:760px;margin:0 auto;padding:0 22px 80px}
+
+  header{padding:44px 0 0}
+  .eyebrow{font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);font-weight:600}
+  h1{font-family:Georgia,serif;font-weight:400;font-size:32px;line-height:1.15;margin:14px 0 0}
+  .intro{color:var(--muted);margin:16px 0 0}
+  .intro strong{color:var(--ink)}
+
+  .hud{position:sticky;top:0;z-index:5;display:flex;gap:26px;align-items:baseline;
+       background:var(--bg);border-bottom:1px solid var(--rule);padding:16px 0;margin:30px 0 0}
+  .hud div{font-family:var(--mono);font-size:13px;color:var(--muted)}
+  .hud b{font-family:Georgia,serif;font-weight:400;font-size:26px;color:var(--ink);
+         display:inline-block;min-width:2.2em}
+  .hud .cmp{margin-left:auto;font-size:12px;color:var(--faint);text-align:right;line-height:1.4}
+
+  fieldset{border:1px solid var(--rule);border-radius:3px;background:var(--card);
+           margin:22px 0 0;padding:20px 22px 24px}
+  legend{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);
+         font-weight:600;padding:0 8px}
+  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+  .full{grid-column:1/-1}
+  label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px}
+  .req{color:var(--accent)}
+  input,textarea{width:100%;padding:9px 11px;font:inherit;font-size:15px;color:var(--ink);
+                 background:var(--bg);border:1px solid var(--rule);border-radius:3px}
+  input:focus,textarea:focus{outline:none;border-color:var(--accent)}
+  textarea{resize:vertical;min-height:64px}
+  .radios{display:flex;gap:18px;padding-top:5px}
+  .radios label{display:flex;align-items:center;gap:6px;color:var(--ink);font-size:15px;margin:0}
+  .radios input{width:auto}
+  .note{font-size:13px;color:var(--faint);margin:12px 0 0}
+
+  button{margin-top:26px;padding:12px 22px;font:inherit;font-weight:600;font-size:15px;
+         color:var(--bg);background:var(--ink);border:0;border-radius:3px;cursor:pointer}
+  button:hover{background:var(--accent)}
+
+  .result{display:none;margin-top:26px;padding:22px;border:1px solid var(--rule);
+          border-left:3px solid var(--ok);border-radius:3px;background:var(--card)}
+  .result.on{display:block}
+  .result h2{font-family:Georgia,serif;font-weight:400;font-size:22px;margin:0 0 10px}
+  .result p{margin:0 0 8px;color:var(--muted);font-size:15px}
+  .result .big{font-family:var(--mono);font-size:15px;color:var(--ink)}
+  footer{margin-top:40px;padding-top:22px;border-top:1px solid var(--rule);
+         font-size:13px;color:var(--faint)}
+  footer a{color:var(--muted)}
+  @media (max-width:640px){.grid{grid-template-columns:1fr}h1{font-size:26px}
+    .hud{gap:16px;flex-wrap:wrap}.hud .cmp{margin-left:0;text-align:left;width:100%}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="eyebrow">chw-voice-pipeline &middot; demo</div>
+  <h1>MOH-100, the way it is filled now</h1>
+  <p class="intro">This is the Kenya Ministry of Health community referral form as a web form: <strong>22 fields, four blocks</strong>. It is the control condition for the pipeline in this repository. Fill it the way a community health volunteer would at the end of a shift, and compare the clock against a forty-five second voice note.</p>
+  <p class="intro">The timer starts when you touch the first field. Nothing is sent anywhere.</p>
+</header>
+
+<div class="hud">
+  <div>elapsed <b id="clock">0s</b></div>
+  <div>fields <b id="count">0</b>/22</div>
+  <div class="cmp">Voice note baseline<br>45 seconds of speech, KES 0.61</div>
+</div>
+
+<form id="form" autocomplete="off">
+
+  <fieldset>
+    <legend>1. Patient / client</legend>
+    <div class="grid">
+      <div><label>Date <span class="req">*</span></label><input type="date" name="f_date" required></div>
+      <div><label>Time of referral</label><input type="time" name="f_time"></div>
+      <div class="full"><label>Patient name <span class="req">*</span></label><input name="f_name" required></div>
+      <div>
+        <label>Sex <span class="req">*</span></label>
+        <div class="radios">
+          <label><input type="radio" name="f_sex" value="M" required> Male</label>
+          <label><input type="radio" name="f_sex" value="F"> Female</label>
+        </div>
+      </div>
+      <div><label>Age (years) <span class="req">*</span></label><input type="number" name="f_age" min="0" max="120" required></div>
+      <div class="full"><label>Village</label><input name="f_village"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>2. Referral details</legend>
+    <div class="grid">
+      <div class="full"><label>Reason(s) for referral <span class="req">*</span></label><textarea name="f_reasons" required></textarea></div>
+      <div class="full"><label>Main problem(s)</label><textarea name="f_problems"></textarea></div>
+      <div class="full"><label>Treatment given</label><textarea name="f_treatment"></textarea></div>
+      <div class="full"><label>Comments</label><textarea name="f_comments"></textarea></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>3. Community health volunteer</legend>
+    <div class="grid">
+      <div><label>CHV name <span class="req">*</span></label><input name="f_chvname" required></div>
+      <div><label>Mobile number</label><input type="tel" name="f_chvmobile"></div>
+      <div><label>Village / estate</label><input name="f_chvvillage"></div>
+      <div><label>Sub location</label><input name="f_subloc"></div>
+      <div><label>Location</label><input name="f_loc"></div>
+      <div><label>Ward</label><input name="f_ward"></div>
+      <div><label>Community unit</label><input name="f_unit"></div>
+      <div><label>Link health facility</label><input name="f_facility"></div>
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>4. Receiving officer &mdash; completed at the facility</legend>
+    <div class="grid">
+      <div><label>Receiving officer name</label><input name="f_offname"></div>
+      <div><label>Profession</label><input name="f_prof"></div>
+      <div><label>Date received</label><input type="date" name="f_rdate"></div>
+      <div><label>Time received</label><input type="time" name="f_rtime"></div>
+      <div class="full"><label>Receiving health facility</label><input name="f_rfac"></div>
+    </div>
+    <p class="note">The voice pipeline never populates this block. It belongs to the facility, not the CHV.</p>
+  </fieldset>
+
+  <button type="submit">Submit referral</button>
+</form>
+
+<div class="result" id="result">
+  <h2 id="verdict"></h2>
+  <p class="big" id="detail"></p>
+  <p id="closing"></p>
+</div>
+
+<footer>
+  Nothing entered here leaves your browser. No network request is made, no storage is used.
+  Part of <a href="https://github.com/wachisai/chw-voice-pipeline">chw-voice-pipeline</a>.
+</footer>
+
+</div>
+
+<script>
+(function () {
+  var VOICE_SECONDS = 45;
+  var form = document.getElementById('form');
+  var clockEl = document.getElementById('clock');
+  var countEl = document.getElementById('count');
+  var started = null, ticker = null;
+
+  function fields() {
+    return Array.prototype.slice.call(
+      form.querySelectorAll('input:not([type=radio]), textarea')
+    );
+  }
+
+  function filled() {
+    var n = fields().filter(function (el) { return el.value.trim() !== ''; }).length;
+    if (form.querySelector('input[name=f_sex]:checked')) n += 1;
+    return n;
+  }
+
+  function start() {
+    if (started) return;
+    started = Date.now();
+    ticker = setInterval(function () {
+      clockEl.textContent = Math.floor((Date.now() - started) / 1000) + 's';
+    }, 250);
+  }
+
+  form.addEventListener('input', function () { start(); countEl.textContent = filled(); });
+  form.addEventListener('focusin', start);
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    clearInterval(ticker);
+    var seconds = started ? Math.round((Date.now() - started) / 1000) : 0;
+    var ratio = seconds / VOICE_SECONDS;
+
+    document.getElementById('verdict').textContent =
+      seconds + ' seconds, ' + filled() + ' of 22 fields';
+    document.getElementById('detail').textContent =
+      'Voice note: ' + VOICE_SECONDS + 's of speech. This form took ' +
+      ratio.toFixed(1) + ' times as long.';
+    document.getElementById('closing').textContent = ratio > 1
+      ? 'The point is not that typing is slow. It is that this is the form that gets skipped at the end of a long day, and a form nobody completes produces no data at all.'
+      : 'Faster than the baseline, which happens when the form is filled at a desk rather than in the field. The field case is the one that decides whether routine data exists.';
+    document.getElementById('result').classList.add('on');
+    document.getElementById('result').scrollIntoView({ behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
