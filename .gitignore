@@ -1,0 +1,19 @@
+.env
+.env.*
+!.env.example
+
+# Captured referrals. Real ones are patient data and must never be committed.
+data/referrals.csv
+data/*.csv
+data/audio/
+*.ogg
+*.mp3
+*.m4a
+*.wav
+
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.venv/
+venv/
+.DS_Store
